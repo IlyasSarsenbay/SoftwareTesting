@@ -4,6 +4,15 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      shard_count:
+        description: Number of shards (choose 1 for the baseline or 4 for CI)
+        required: true
+        type: choice
+        options:
+          - '1'
+          - '4'
+        default: '4'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -11,13 +20,14 @@ concurrency:
 
 jobs:
   test:
-    name: Tests (shard ${{ matrix.shardIndex }}/4)
+    name: Tests (shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        shardIndex: [1, 2, 3, 4]
+        shardIndex: ${{ fromJSON(inputs.shard_count == '1' && '[1]' || '[1, 2, 3, 4]') }}
+        shardTotal: ${{ fromJSON(inputs.shard_count == '1' && '[1]' || '[4]') }}
     steps:
       - uses: actions/checkout@v4
 
@@ -33,7 +43,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run Playwright tests
-        run: npx playwright test --shard=${{ matrix.shardIndex }}/4
+        run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         env:
           BASE_URL: ${{ vars.BASE_URL || 'https://practicesoftwaretesting.com' }}
 

@@ -51,14 +51,14 @@ The public demo is shared and can change without notice. A failing run should be
 
 ### Runtime
 
-Actual GitHub Actions measurements are pending the first single-shard and four-shard runs. No run links or timings are available yet.
+The four-shard measurement below is from GitHub Actions run #8. This is one observation, not a median; shard 1 encountered the public demo site's Cloudflare human-verification page, while the other shards and report merge completed.
 
 | Configuration | Total run time | Run tests step (slowest shard) | Run |
 | --- | --- | --- | --- |
 | 1 job, no sharding | Pending Actions run | Pending Actions run | Pending |
-| 4 shards + merge | Pending Actions run | Pending Actions run | Pending |
+| 4 shards + merge | 1 min 50 s | 35 s (slowest shard) | [run #8](https://github.com/IlyasSarsenbay/SoftwareTesting/actions/runs/43728640863) |
 
-After both variants have run, replace the pending cells with Actions timings and links. The four-shard run also includes parallel setup and a report-merge job, so the suite size and setup time affect the overall speedup.
+To collect the single-job baseline, use Actions → Playwright Tests → Run workflow and choose `shard_count: 1`; the normal push, pull-request, and manual runs default to four shards. After that run, replace the pending cells with its Actions timings and link. The four-shard run also includes parallel setup and a report-merge job, so the suite size and setup time affect the overall speedup.
 
 ### Running CI mode locally
 
