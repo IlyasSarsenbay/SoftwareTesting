@@ -11,9 +11,10 @@ Automated browser regression checks for the Toolshop training application at <ht
 ## Run
 
 ```bash
-npm ci
-npx playwright install chromium
-npm test
+git clone https://github.com/IlyasSarsenbay/SoftwareTesting.git
+cd SoftwareTesting
+npm install
+npx playwright test
 ```
 
 Other useful commands: `npm run test:headed`, `npm run test:ui`, and `npm run report`.
