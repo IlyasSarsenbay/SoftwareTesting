@@ -16,7 +16,7 @@ export default defineConfig({
       ]
     : [['html', { open: 'on-failure' }]],
   use: {
-    baseURL: process.env.BASE_URL ?? 'https://practicesoftwaretesting.com',
+    baseURL: process.env.BASE_URL?.trim() || 'https://practicesoftwaretesting.com',
     testIdAttribute: 'data-test',
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',

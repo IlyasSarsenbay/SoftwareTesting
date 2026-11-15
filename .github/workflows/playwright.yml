@@ -35,7 +35,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test --shard=${{ matrix.shardIndex }}/4
         env:
-          BASE_URL: ${{ vars.BASE_URL }}
+          BASE_URL: ${{ vars.BASE_URL || 'https://practicesoftwaretesting.com' }}
 
       - name: Upload blob report
         if: ${{ !cancelled() }}
