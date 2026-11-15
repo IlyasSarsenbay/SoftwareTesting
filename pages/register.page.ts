@@ -26,6 +26,5 @@ export class RegisterPage {
   }
   async expectRegistrationAccepted() {
     await expect(this.page).toHaveURL(/\/auth\/login/);
-    await expect(this.page.getByTestId('login-submit')).toBeVisible();
   }
 }

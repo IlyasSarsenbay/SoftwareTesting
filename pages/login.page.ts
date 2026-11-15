@@ -13,7 +13,10 @@ export class LoginPage {
     this.alert = page.getByText('Invalid email or password');
   }
 
-  async open() { await this.page.goto('/auth/login'); }
+  async open() {
+    await this.page.goto('/auth/login');
+    await expect(this.submit).toBeVisible({ timeout: 15_000 });
+  }
   async signIn(email: string, password: string) {
     await this.email.fill(email);
     await this.password.fill(password);
