@@ -17,6 +17,14 @@ export class LoginPage {
     await this.page.goto('/auth/login');
     await expect(this.submit).toBeVisible({ timeout: 15_000 });
   }
+  async openSignedOut() {
+    await this.page.context().clearCookies();
+    await this.page.evaluate(() => {
+      localStorage.clear();
+      sessionStorage.clear();
+    });
+    await this.open();
+  }
   async signIn(email: string, password: string) {
     await this.email.fill(email);
     await this.password.fill(password);

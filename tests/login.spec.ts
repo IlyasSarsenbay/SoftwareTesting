@@ -6,7 +6,7 @@ test('valid customer credentials open the account page', async ({ loginPage, reg
   await registerPage.open();
   await registerPage.register(customer);
   await registerPage.expectRegistrationAccepted();
-  await loginPage.open();
+  await loginPage.openSignedOut();
   await loginPage.signIn(customer.email, customer.password);
   await loginPage.expectSignedIn();
   await page.screenshot({ path: 'screenshots/login-account.png', fullPage: true });
