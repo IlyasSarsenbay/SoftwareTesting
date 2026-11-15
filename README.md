@@ -47,7 +47,7 @@ The public demo is shared and can change without notice. A failing run should be
 - merges the shard blob reports into one HTML report and one JUnit XML report;
 - uploads shard results (traces, screenshots, videos, and per-shard JUnit) and merged reports; user-facing reports are retained for 14 days.
 
-**CI settings** (`playwright.config.ts`, when `CI=true`): `forbidOnly: true`, `retries: 2`, two workers, `list`/`blob`/`junit` reporters, and `trace: 'on-first-retry'`. `merge.config.ts` creates the combined HTML and JUnit reports.
+**CI settings** (`playwright.config.ts`, when `CI=true`): `forbidOnly: true`, `retries: 2`, one worker per shard (the four shards already run in parallel, and this limits load on the shared public demo site), `list`/`blob`/`junit` reporters, and `trace: 'on-first-retry'`. `merge.config.ts` creates the combined HTML and JUnit reports.
 
 ### Runtime
 
