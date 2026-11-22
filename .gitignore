@@ -1,9 +1,11 @@
-
-# Playwright
 node_modules/
 .playwright-browsers/
 /test-results/
 /playwright-report/
 /blob-report/
+/all-blob-reports/
+/reports/
+/.act-artifacts/
+/.secrets
 /playwright/.cache/
 /playwright/.auth/

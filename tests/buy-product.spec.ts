@@ -6,7 +6,7 @@ test('add a product to the cart and complete checkout', async ({ cartPage, page,
   await registerPage.open();
   await registerPage.register(customer);
   await registerPage.expectRegistrationAccepted();
-  await loginPage.open();
+  await loginPage.openSignedOut();
   await loginPage.signIn(customer.email, customer.password);
   await loginPage.expectSignedIn();
   await cartPage.addFirstAvailableProduct();
