@@ -51,14 +51,16 @@ The public demo is shared and can change without notice. A failing run should be
 
 ### Runtime
 
-The four-shard measurement below is from GitHub Actions run #8. This is one observation, not a median; shard 1 encountered the public demo site's Cloudflare human-verification page, while the other shards and report merge completed.
+The measurements below are single observations from GitHub Actions, not medians. The four-shard run's shard 1 encountered the public demo site's Cloudflare human-verification page. The one-shard run completed the test step in 40.4 s: six tests passed, while the checkout test failed because no product card was found (consistent with the Cloudflare-related page seen in other runs). Therefore, its duration is recorded for transparency but is not a successful-suite baseline.
 
 | Configuration | Total run time | Run tests step (slowest shard) | Run |
 | --- | --- | --- | --- |
-| 1 job, no sharding | Pending Actions run | Pending Actions run | Pending |
+| 1 job, no sharding | 1 min 59 s | 40.4 s (6 passed, checkout failed) | [run #16](https://github.com/IlyasSarsenbay/SoftwareTesting/actions/runs/45002697371) |
 | 4 shards + merge | 1 min 50 s | 35 s (slowest shard) | [run #8](https://github.com/IlyasSarsenbay/SoftwareTesting/actions/runs/43728640863) |
 
-To collect the single-job baseline, use Actions → Playwright Tests → Run workflow and choose `shard_count: 1`; the normal push, pull-request, and manual runs default to four shards. After that run, replace the pending cells with its Actions timings and link. The four-shard run also includes parallel setup and a report-merge job, so the suite size and setup time affect the overall speedup.
+In [run #8](https://github.com/IlyasSarsenbay/SoftwareTesting/actions/runs/43728640863), the `setup-node` log reports `Cache hit` and `Cache restored successfully`. Its artifacts include `playwright-report` and `test-results-1` through `test-results-4` (as well as the merged `junit-report`).
+
+The four-shard workflow completed in 9 s less in these observations, but this is not a reliable speedup comparison because both runs encountered the external demo site's intermittent challenge and the one-shard run did not pass the full suite. The four-shard run also includes parallel setup and a report-merge job, so suite size and setup time affect total duration.
 
 ### Running CI mode locally
 
